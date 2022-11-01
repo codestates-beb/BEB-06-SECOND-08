@@ -3,6 +3,7 @@ import "./App.css";
 import MetamaskConnect from "./apps/MetamaskConnect";
 import Community from "./apps/Community";
 import TokenTransfer from "./apps/TokenTransfer";
+import Solidity from "./apps/Solidity";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <MetamaskConnect />
       <Community />
       <TokenTransfer />
+      <Solidity />
     </div>
   );
 }
