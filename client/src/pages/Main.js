@@ -83,6 +83,9 @@ const Main = () => {
                         </Nav>
                         <Form className="d-flex">
                             <Form.Control onChange={setSEARCH}
+
+                        <Form className="d-flex">
+                            <Form.Control
                                 type="search"
                                 placeholder="Search"
                                 className="me-2"
@@ -127,6 +130,10 @@ const Main = () => {
                         } */}
                     </div>
                 </Row>
+                            <Button variant="outline-success">Search</Button>
+                        </Form>
+                    </Container>
+                </Navbar>
             </div>
             <Link to="/postpage">
                 <center><Button className="go_to_font" variant="outline-warning mt-4 mb-3 p-3 btn-Info">Posting</Button></center>
