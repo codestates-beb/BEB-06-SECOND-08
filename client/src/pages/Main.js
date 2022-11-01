@@ -18,11 +18,11 @@ const SERVER_URL = 'http://localhost:3000/main'
 const Main = () => {
     const [search, setSearch] = useState("");
     const [postlist, setPostlist] = useState([
-         {
-          No: 13,
-          nickname: 'jungbal',
-          title: 'jh429800',
-          views: 123
+        {
+            No: 13,
+            nickname: 'jungbal',
+            title: 'jh429800',
+            views: 123
         },
         // {
         //   No: 332,
@@ -30,7 +30,7 @@ const Main = () => {
         //   title: 'jh429800',
         //   views: 'asdq'
         // }
-      ]);
+    ]);
     const [data, setData] = useState({}) //@ 받아올 데이터
     // const [page, setPage] = useState(1); //@ 페이지네이션
 
@@ -83,9 +83,6 @@ const Main = () => {
                         </Nav>
                         <Form className="d-flex">
                             <Form.Control onChange={setSEARCH}
-
-                        <Form className="d-flex">
-                            <Form.Control
                                 type="search"
                                 placeholder="Search"
                                 className="me-2"
@@ -130,10 +127,6 @@ const Main = () => {
                         } */}
                     </div>
                 </Row>
-                            <Button variant="outline-success">Search</Button>
-                        </Form>
-                    </Container>
-                </Navbar>
             </div>
             <Link to="/postpage">
                 <center><Button className="go_to_font" variant="outline-warning mt-4 mb-3 p-3 btn-Info">Posting</Button></center>
@@ -141,5 +134,4 @@ const Main = () => {
         </div>
     );
 }
-
-export default Main
+export default main;
