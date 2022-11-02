@@ -47,5 +47,27 @@
 * 로그인 시,  server 에서 DB 내용과 비교 대조하여 결과 보내주기 
 <img width="912" alt="image" src="https://user-images.githubusercontent.com/81156500/199141685-f0e9ac29-7007-448f-8acb-87ce6b298ceb.png">
 
+22'Nov'02 (참석하신분: 김준섭, 이정원, 문지훈, 최진영)
+* 현재 진행 과정 점검 및 future plan 작성
+    * 기능구현: 토요일 
+    * 기타 CSS, debug: 일요일
+<img width="1358" alt="image" src="https://user-images.githubusercontent.com/81156500/199409822-7855ffc1-4c36-4faa-8cdc-c00d257e0e59.png">
+* 내일 미팅 : 오전 10:15 , (진영님은 경조사 )
+* BE 
+    * NFT, posting endpoint 완성 하기
+    <img width="914" alt="image" src="https://user-images.githubusercontent.com/81156500/199409932-7d760778-fe73-4ff1-8b57-3ac99d6075c9.png">
+
+* FE
+    * Mypage
+        * Endpoint 확인 필요
+        * Token transfer 확인
+    * Market place
+        * 구성 예정
+    * NFT mint
+        * Endpoint 확인
+    * posting
+        * 구성은완료
+        * 기능 추가 예정
+        * Endpoint 확인
 
 
