@@ -70,4 +70,14 @@
         * 기능 추가 예정
         * Endpoint 확인
 
+22'Nov'03 ( 참석하신 분 : 김준섭, 이정원 , 문지훈 / 최진영 (경조사))
+* Endpoint
+    * Endpoint 체크
+        * 이정원
+            * http/localhost:8080/post/${nickname}
+            * 로그인 데이터 필요 register는 성공여부
+        * 김준섭
+            * Mint DB 요소 변경
+            * 마켓 플레이스 sell 등록 시, false -> true 변경 ( id )
+            * 마켓 플레이스에서 true 데이터만 전달 ( id )
 
