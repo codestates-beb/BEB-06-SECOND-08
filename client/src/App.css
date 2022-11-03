@@ -24,8 +24,9 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 8vmin;
   pointer-events: none;
+  float: left;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -49,11 +50,11 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+/* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-}
+} */

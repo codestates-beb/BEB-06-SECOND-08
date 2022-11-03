@@ -6,10 +6,7 @@ function TokenTransfer() {
   const [buyNFTcost, setBuyNFTcost] = useState();
   const [buyNFTAddr, setButNFTAddr] = useState();
 
-  //@ 토큰 발행
-  const mintToken = () => {
-    //mint token
-  };
+
 
   //@ 전송할 토큰 갯수
   const transferTokenQty = (e) => {

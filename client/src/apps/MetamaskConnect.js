@@ -3,7 +3,7 @@ import { useState } from "react";
 function MetamaskConnect() {
   const [adress, setAdress] = useState("not connected");
   const [network, setNetwork] = useState();
-  const chinidList = {
+  const chainidList = {
     0x1: "Ethereum mainnet",
     0x5: "Goeril",
     0xaa36a7: "Sepolia",
@@ -14,7 +14,7 @@ function MetamaskConnect() {
       method: "eth_requestAccounts",
     });
     let chainid = window.ethereum.chainId;
-    let network = chinidList[chainid * 1];
+    let network = chainidList[chainid * 1];
     setAdress(`@Address: ${window.ethereum.selectedAddress}`);
     setNetwork(`@Network: ${network}`);
   };
