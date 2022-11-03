@@ -56,7 +56,7 @@ router.post('/login', function(req, res){
     })
 })
 
-app.post('/post', function(req, res){
+router.post('/post', function(req, res){
     const nickname = req.body.nickname;
     const title = req.body.title;
     const content = req.body.content;
@@ -66,6 +66,14 @@ app.post('/post', function(req, res){
         console.log(result);
         res.json({result : result});
     })
+})
+
+router.get('/post/:nickname?', function(req, res){
+    let query = {};
+    if(req.params.nickname){
+        query.nickname = req.params.nickname;
+    }
+    connection.query
 })
 
 function isLogin(req, res, next){
