@@ -4,11 +4,11 @@ import abi from "./abi/abi";
 const Web3 = require("web3");
 
 function Solidity() {
-  //const mainAddr = "0x691d21d24cac39b959fF6a562b0b41C9645EE3a1"; //고릴 주소
-  //const smAddress = "0x5404EcB07eea74Cc3B121E272156eE56ac6Bb399"; //고릴 배포 smaddress
+  const mainAddr = "0x691d21d24cac39b959fF6a562b0b41C9645EE3a1"; //고릴 주소
+  const smAddress = "0xd631ed21F0d1702761ad6dc36732494183871C2b"; //고릴 배포 smaddress
 
-  const smAddress = "0x07999b5a50bb6ec9E0cBA84FCE849bD9EE9bD7d1"; // 가나슈
-  const mainAddr = "0x51e98DE3dB1a0835bCfC43020C5C1a1aac31d667"; // 가나슈
+  //const smAddress = "0xA2FEbe842A4b83560CcCc8e19abCF07843eb6298"; // 가나슈
+  //const mainAddr = "0xd631ed21F0d1702761ad6dc36732494183871C2b"; // 가나슈
 
   //@ web3 connect
   const web3 = new Web3(Web3.givenProvider);
@@ -18,7 +18,7 @@ function Solidity() {
   const [tokenUri, setTokenUri] = useState();
   const [to, setTo] = useState();
   const [amount, setAmount] = useState();
-  const [seller, setSeller] = useState(mainAddr);
+  const [seller, setSeller] = useState();
   const [id, setId] = useState();
   const [cost, setCost] = useState();
   const [toTransfer, setToTransfer] = useState();
@@ -45,9 +45,21 @@ function Solidity() {
   const nftMint = () => {
     contract.methods
       .NFTMint(tokenUri)
-      .send({ from: window.ethereum.selectedAddress })
+      .send({ from: window.ethereum.selectedAddress }, (err, result) => {
+        console.log(result);
+      })
+      .on("receipt", function (receipt) {
+        console.log(receipt);
+      });
+  };
+
+  //@  TokenId
+  const getTokenId = () => {
+    contract.methods
+      .getTokenId()
+      .call({ from: window.ethereum.selectedAddress })
       .then((e) => {
-        console.log("nftMint_result", e);
+        console.log(e); // e 가 tokenID
       });
   };
 
@@ -210,6 +222,7 @@ function Solidity() {
       <p>balance 조회</p>
       <textarea onChange={setAddr_}>조회할주소</textarea>
       <button onClick={getBalance}>TokenBalance</button>
+      <button onClick={getTokenId}>getOtkenId</button>
     </div>
   );
 }
