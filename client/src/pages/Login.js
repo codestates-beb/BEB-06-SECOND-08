@@ -17,7 +17,8 @@ function Login({ setCheckLogin, address }) {
 
     const loginChange = async () => {
         try {
-            axios.post('///',
+
+            axios.post('http://localhost:8080/login',
                 {
                     address,
                     password
@@ -28,12 +29,13 @@ function Login({ setCheckLogin, address }) {
                     }
                     if (result.data.address === address && result.data.password === password) {
                         setCheckLogin();
+                        alert`${result.data.nickName}님 환영합니다.`
                     } else {
-                        console.log("비번이 틀림");
+                        alert("password is wrong");
                     }
                 })
         } catch (err) {
-            console.log(err)
+            console.log(err) //check axios res(back) 닉네임ㅂ때문에 아마 res상태말고 데이터 값을 받아와야할듯
 
         }
     }
@@ -56,10 +58,9 @@ function Login({ setCheckLogin, address }) {
                             <div style={{ color: 'white' }}> {address} </div>
                         </div>
                         <div className="second-input">
-
                             <input type='password' value={password} placeholder="password" className="name" onChange={onHandlePwd}></input>
                         </div>
-                        <div className="login-button"> <button onClick={loginChange}>Login</button></div>
+                        <div className="login-button"> <button claseName="loginBtn" onClick={loginChange}>Login</button></div>
 
                     </div>
                 </div>

@@ -1,15 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Web3 from 'web3'
-import Main from "./Main";
+import Main from "./pages/Main";
 import MyPage from "./pages/MyPage";
 import Post from "./pages/Post";
 import Login from "./pages/Login"
 import Headers from "./components/Headers"
+import SignUp from "./pages/SignUp";
 import { Link } from "react-router-dom";
 import logo from "./images/Logomark-steemit.png"
 import Footer from "./components/footer";
 import { useEffect, useState } from "react";
+import MarketPlace from "./pages/MarketPlace";
 
 
 function App() {
@@ -34,10 +36,12 @@ function App() {
     let network = chinidList[chainid * 1];
     setAddress(`${window.ethereum.selectedAddress}`);
     setNetwork(`@Network: ${network}`);
+
   };
 
   const setCheckLogin = () => {
     setIsLogin(!login);
+    console.log(login)
   }
 
   useEffect(() => {
@@ -45,7 +49,10 @@ function App() {
       try {
         const web = new Web3(window.ethereum);
         setWeb3(web);
-        metaMaskConnection();
+        metaMaskConnection().then(() => {
+          console.log(address)
+        })
+
       } catch (err) {
         console.log(err);
       }
@@ -60,12 +67,14 @@ function App() {
           <img src={logo} className="App-logo" />
         </Link>
         <h1> Steem Eight</h1>
-        <Headers login={login} />
+        <Headers login={login} setCheckLogin={setCheckLogin} />
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/mypage" element={<MyPage login={login} address={address} />} />
-          <Route path="/login" element={<Login setCheckLogin={setCheckLogin} address={address} />} />
+          <Route path="/mypage" element={<MyPage login={login} address={address} setCheckLogin={setCheckLogin} />} />
+          <Route path="/login" element={<Login address={address} />} />
           <Route path="/post" element={<Post />} />
+          <Route path="/signup" element={<SignUp address={address} />} />
+          <Route path="/market" element={<MarketPlace address={{ address }} />} />
         </Routes>
       </div>
     </BrowserRouter>

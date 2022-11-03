@@ -4,10 +4,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 
-const Headers = (login) => {
+const Headers = ({ login, setCheckLogin }) => {
 
     const handleLogout = () => {
-
+        setCheckLogin();
+        console.log(login)
     }
     return (
         <>
@@ -18,7 +19,9 @@ const Headers = (login) => {
                         <Nav.Link href="/">Main</Nav.Link>
                         <Nav.Link href="/MyPage">MyPage</Nav.Link>
                         <Nav.Link href="/Post">Post</Nav.Link>
-                        {login ? <Nav.Link href="/" onClick={handleLogout}>Logout</Nav.Link> : <Nav.Link href="/Login">Login</Nav.Link>}
+                        <Nav.Link href="/market">Market</Nav.Link>
+                        <Nav.Link href="/SignUp">SignUp</Nav.Link>
+                        {login ? <Link to="/" onClick={handleLogout}>Logout</Link> : <Nav.Link href="/Login">Login</Nav.Link>}
                     </Nav>
                 </Container>
             </Navbar>

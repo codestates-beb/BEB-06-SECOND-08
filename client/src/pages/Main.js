@@ -134,4 +134,4 @@ const Main = () => {
         </div>
     );
 }
-export default main;
+export default Main;
