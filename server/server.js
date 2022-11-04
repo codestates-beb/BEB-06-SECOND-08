@@ -32,11 +32,20 @@ router.post('/register', function(req, res){
   const address = req.body.user_address;
   const nickname = req.body.user_nickname;
   const password = req.body.user_password
-    connection.query('insert into user(user_address, user_nickname, user_password) values(?, ?, ?)', [address, nickname, password], function (err, result) {
-        if(err) return console.log(err)
-        console.log(result)
-        res.json({result : result})
-    });   
+  connection.query(`select * from user where user_address = "${address}"`, [address], function(err, result){
+    if(err) return console.log(err);
+    console.log(result);
+    if(result.length){
+        res.status(400).json({message: "address is exist"})
+    }
+    else{
+        connection.query('insert into user(user_address, user_nickname, user_password) values(?, ?, ?)', [address, nickname, password], function (err, result) {
+            if(err) return console.log(err)
+            console.log(result)
+            res.json({result: result})
+        });   
+    }
+  })
 })
 
 router.post('/login', function(req, res){
@@ -46,7 +55,7 @@ router.post('/login', function(req, res){
         if(err) return console.log(err);
         if(result.length){
             if(result[0].user_password === password){
-                res.status(200).json({message: 'login successful'})
+                res.status(200).json({result: result})
             }else{
                 res.status(400).json({message: 'address and password not match'})
             }
@@ -60,20 +69,44 @@ router.post('/post', function(req, res){
     const nickname = req.body.nickname;
     const title = req.body.title;
     const content = req.body.content;
-    const likes = req.body.likes;
-    connection.query('insert into post(nickname, title, content, likes) values(?, ?, ?, ?)', [nickname, title, content, likes], function(err, result){
+    const heart = req.body.heart;
+    connection.query('insert into post(nickname, title, content, heart) values(?, ?, ?, ?)', [nickname, title, content, heart], function(err, result){
         if(err) return console.log(err);
         console.log(result);
         res.json({result : result});
     })
 })
 
+router.get('/post', function(req, res){
+    connection.query('select * from post', function(err, result){
+        if(err) return console.log(err);
+        console.log(result);
+        res.json({result: result});
+    })
+})
+
 router.get('/post/:nickname?', function(req, res){
-    let query = {};
-    if(req.params.nickname){
-        query.nickname = req.params.nickname;
+    const nickname = req.params.nickname
+    connection.query(`select content from post where nickname = "${nickname}"`, [nickname], function(err, result){
+        if(err) return console.log(err);
+        console.log(result);
+        res.json({result: result});
+    })
+})
+
+router.patch('/likes/:id?', function(req, res){
+    const id = req.params.id
+    if(req.query.increase){
+        connection.query(`update post set heart = heart + 1  where id = ${id};`, function(err, result){
+            if(err) return console.log(err)
+            res.json({result: result});
+        })
+    }else{
+        connection.query(`update post set heart = heart - 1 where id = ${id};`, function(err, result){
+            if(err) return console.log(err)
+            res.json({result: result});
+        })
     }
-    connection.query
 })
 
 function isLogin(req, res, next){
