@@ -3,14 +3,15 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default function saveMinData(req, res) {
+  // 접속
   var connection = mysql.createConnection({
     host: "localhost",
     user: process.env.sqlusser,
     password: process.env.sqlpassword,
   });
-
+  //연결
   connection.connect();
-
+  // 데이터베이스 없으면생성
   connection.query(
     "CREATE DATABASE if not exists NFTStore",
     (error, results, fields) => {
@@ -18,10 +19,11 @@ export default function saveMinData(req, res) {
       //console.log(results);
     }
   );
-
+  // 선택
   connection.query("USE NFTStore", function (error, results, fields) {
     if (error) throw error;
   });
+  //테이블 없으면 생성
 
   connection.query(
     "CREATE TABLE if not exists MintData(Id int, address varchar(255), Name varchar(255), Url varchar(255), sell BOOL ) ",

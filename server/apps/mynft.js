@@ -17,7 +17,7 @@ export default function mynft(req, res) {
   });
 
   connection.query(
-    `UPDATE MintData SET sell = 0 WHERE Id =${req.Id}`,
+    `UPDATE MintData SET sell = 1 WHERE Id =${req.Id}`,
     (error, results, fields) => {
       if (error) throw error;
       res.send(results);
