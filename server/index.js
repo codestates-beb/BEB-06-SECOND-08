@@ -113,6 +113,12 @@ app.post("/post", function (req, res) {
   ]);
   
 });
+//@ post all data
+app.get("/postall", function (req, res) {
+  connection.query("select * from post", (err, result, fields) => [
+    res.send(result),
+  ]);
+});
 
 //@ content만 주기
 app.get("/post/:nickname?", function (req, res) {
