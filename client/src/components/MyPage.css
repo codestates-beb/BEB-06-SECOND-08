@@ -1,0 +1,38 @@
+.head {
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  padding: 90px 0 90px 0;
+  background-color: black;
+}
+.thumb {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+}
+h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #06d6a9;
+  font-weight: 400;
+}
+
+.thumb-wrapper {
+  background-color: white;
+  border-radius: 150px;
+  align-items: flex;
+  height: 115px;
+  width: 115px;
+}
+.address {
+  padding: 8px 22px 10px 22px;
+  background-color: #06d6a9;
+  display: inline-block;
+  text-align: center;
+}
+
+.imgs {
+  padding-top: 20px;
+  justify-content: center;
+  display: flex;
+}

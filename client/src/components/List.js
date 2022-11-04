@@ -1,24 +1,47 @@
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Cardpost from './Cardpost';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Table from 'react-bootstrap/Table';
-import { Link } from "react-router-dom";
+const List = () => {
+    const navigate = useNavigate();
+    const [posts, setPosts] = useState([]);
+    const getPosts = () => {
+        axios.get('http://localhost:3001/Post').then((res) => {
+            console.log(res.data)
+            setPosts(res.data);
+        })
+    }
 
-export default function List({ No, title, nickname, views, link }) {
+    useEffect(() => {
+        getPosts();
+    }, [])
+
+
     return (
-        <Container>
-            <Link to={link}>
-                <Table striped bordered hover className="mt-5" >
-                    <tbody>
-                        <tr>
-                            <th>{No}</th>
-                            <th>{title}</th>
-                            <th>{nickname}</th>
-                            <th>{views}</th>
-                        </tr>
-                    </tbody>
-                </Table>
-            </Link>
-        </Container>
+        <div>
+            <div className='ms-1 d-flex justify-content-between'>
+                <h1>Posting List</h1>
+                <div>
+                    <Link to='/Post' className='btn btn-success'>
+                        Create Posting
+                    </Link>
+                </div>
+            </div>
+            {posts.map(el => {
+                return (
+                    <Cardpost
+                        key={el.id}
+                        title={el.title}>
+                        onClick={() => console.log('h1')}
+                    </Cardpost>
+                )
+            })}
+        </div>
     )
 }
+
+export default List

@@ -4,16 +4,21 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 
-const Headers = () => {
+const Headers = (login) => {
+
+    const handleLogout = () => {
+
+    }
     return (
         <>
-            <Navbar fixedTop style={{ backgroundSize: "0", backgroundColor: "#06d6a9" }}>
+            <Navbar style={{ backgroundSize: "0", backgroundColor: "#06d6a9" }}>
                 <Container>
                     <Navbar.Brand href="/">SteemEight</Navbar.Brand>
                     <Nav className="me-auto">
                         <Nav.Link href="/">Main</Nav.Link>
                         <Nav.Link href="/MyPage">MyPage</Nav.Link>
                         <Nav.Link href="/Post">Post</Nav.Link>
+                        {login ? <Nav.Link href="/" onClick={handleLogout}>Logout</Nav.Link> : <Nav.Link href="/Login">Login</Nav.Link>}
                     </Nav>
                 </Container>
             </Navbar>
