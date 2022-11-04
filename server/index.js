@@ -104,14 +104,14 @@ app.post("/post", function (req, res) {
     function (err, result, fields) {
       if (err) return console.log(err);
       //console.log(result);
-      res.send(result);
+    //  res.send(result);
     }
   );
-  /* 저장하고 저장된 데이터를 받고 싶으면살리기
+  // 저장하고 저장된 데이터를 받고 싶으면살리기
   connection.query("select * from post", (err, result, fields) => [
     res.send(result),
   ]);
-  */
+  
 });
 
 //@ content만 주기
