@@ -17,10 +17,11 @@ import MarketPlace from "./pages/MarketPlace";
 function App() {
 
   //메마로그인을하고
-  const [login, setIsLogin] = useState(true)
+  const [login, setIsLogin] = useState(false)
   const [address, setAddress] = useState("not connected");
   const [network, setNetwork] = useState();
   const [web3, setWeb3] = useState();
+  const loginAddr = localStorage.getItem('address')
 
   const chinidList = {
     0x1: "Ethereum mainnet",
@@ -40,8 +41,17 @@ function App() {
   };
 
   const setCheckLogin = () => {
-    setIsLogin(!login);
-    console.log(login)
+    if (!loginAddr) {
+      setIsLogin(false)
+    }
+    else {
+      setIsLogin(true)
+    }
+  }
+  const setLogout = async () => {
+    localStorage.removeItem('address')
+    localStorage.removeItem('password')
+    localStorage.removeItem('nickname')
   }
 
   useEffect(() => {
@@ -50,7 +60,7 @@ function App() {
         const web = new Web3(window.ethereum);
         setWeb3(web);
         metaMaskConnection().then(() => {
-          console.log(address)
+          console.log(window.ethereum.selectedAddress)
         })
 
       } catch (err) {
@@ -58,8 +68,14 @@ function App() {
       }
     }
   }, []);
+  useEffect(() => {
 
+    setCheckLogin();
+  }, [loginAddr]);
 
+  // useEffect(()=>{
+
+  // },[login])
   return (
     <BrowserRouter>
       <div className="App">
@@ -67,11 +83,11 @@ function App() {
           <img src={logo} className="App-logo" />
         </Link>
         <h1> Steem Eight</h1>
-        <Headers login={login} setCheckLogin={setCheckLogin} />
+        <Headers login={login} setLogout={setLogout} setCheckLogin={setCheckLogin} />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/mypage" element={<MyPage login={login} address={address} setCheckLogin={setCheckLogin} />} />
-          <Route path="/login" element={<Login address={address} />} />
+          <Route path="/login" element={<Login address={address} login={login} setCheckLogin={setCheckLogin} />} />
           <Route path="/post" element={<Post />} />
           <Route path="/signup" element={<SignUp address={address} />} />
           <Route path="/market" element={<MarketPlace address={{ address }} />} />
