@@ -9,6 +9,7 @@ import mynft from "./apps/mynft.js";
 import dotenv from "dotenv";
 import mysql from "mysql";
 import queryMintData from "./apps/queryMintData.js"
+import addressChange from "./apps/addresChange.js";
 
 
 dotenv.config();
@@ -182,6 +183,9 @@ app.post("/mint/mynft", (req, res) => {
   mynft(req.body, res);
 });
 
+app.post("/mint/changeAddress", (req, res) => {
+  addressChange(req.body, res);
+})
 /*
  const [imageSrc, setImageSrc] = useState("");
 
