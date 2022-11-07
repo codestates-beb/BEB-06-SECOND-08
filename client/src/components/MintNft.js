@@ -23,10 +23,10 @@ const client = create({
 
 const MintNft = ({ address }) => {
     const [imageView, setImageView] = useState(false)
+    let metaDataUrl = ''
+    let imgCid = ''
     const [imgFile, setImgfile] = useState()
-    const [imgUrl, setImgUrl] = useState();
     const [name, setName] = useState("aa");
-    const [tokenId, setId] = useState();
     const sell = false //이데이터가 어떻게 넘어가는지 확인
     const uploadImg = (e) => {
         let file = e.target.files[0];
@@ -42,56 +42,64 @@ const MintNft = ({ address }) => {
         setName(e.target.value)
         console.log(e.target.value)
     }
-    const minting = async () => {
-        const imgUrl = await client.add(imgFile); //cid
+    const makeMeta = async () => {
+        await client.add(imgFile).then((res) => {
 
-        setImgUrl(imgUrl)
-
-
-        console.log("imgURL" + "https://steemEight.infura-ipfs.io/ipfs/" + imgUrl.path)
+            imgCid = res.path
+            console.log(imgCid)
+            return imgCid;
+        })
+        //console.log("imgURL" + "https://steemEight.infura-ipfs.io/ipfs/" + imgCid)
 
 
         //메타데이터 정보
         const metaData = {
             name,
-            image: "https://steemEight.infura-ipfs.io/ipfs/" + imgUrl.path,
+            image: "https://steemEight.infura-ipfs.io/ipfs/" + imgCid,
 
         }
 
         const metaIpfs = await client.add(JSON.stringify(metaData)) //메타데이터 ipfs CID
 
-        const metaDataUrl = "https://steemEight.infura-ipfs.io/ipfs/" + metaIpfs.path; //cid
+        metaDataUrl = "https://steemEight.infura-ipfs.io/ipfs/" + metaIpfs.path; //cid
         console.log(metaDataUrl)
+
+    }
+    const minting = async () => {
+        makeMeta();
         const web3 = new Web3(window.ethereum)
         const transaction = {
             from: address,
             gas: 20000000, //100만
             gasPrice: web3.utils.toWei("1.5", "gwei")
         }
-        const getTokenId = async () => {
-            await contract.methods
+
+        const contract = new web3.eth.Contract(abi, smAddress);
+
+        const Minting = await contract.methods.NFTMint(metaDataUrl).send(transaction).then((res) => {
+            console.log(res)
+
+            return contract.methods
                 .getTokenId()
                 .call({ from: window.ethereum.selectedAddress })
                 .then((e) => {
-                    setId(e)
-                    console.log(e)
-                });
-        };
 
-        const contract = new web3.eth.Contract(abi, smAddress);
-        const Minting = await contract.methods.NFTMint(metaDataUrl).send(transaction).then((res) => { console.log(res) })
-        getTokenId();
+                    return Minted(e);
+                })
+
+        })
+
         alert("success")
-        Minted();
 
         return Minting;
     }
-    const Minted = async () => {
-        await axios.post("http://localhost:4000/savemintdata", {
-            tokenId: tokenId,
+    const Minted = (e) => {
+        console.log(`here` + imgCid)
+        axios.post("http://localhost:4000/savemintdata", {
+            tokenId: e,
             Address: address,
             Name: name,
-            Url: imgUrl.path,
+            Url: imgCid,
             Sell: sell
         })
             .then((res) => {
@@ -100,6 +108,7 @@ const MintNft = ({ address }) => {
             .catch((err) => {
                 console.log(err)
             })
+
     }
 
     return (

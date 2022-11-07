@@ -73,9 +73,7 @@ function App() {
     setCheckLogin();
   }, [loginAddr]);
 
-  // useEffect(()=>{
 
-  // },[login])
   return (
     <BrowserRouter>
       <div className="App">

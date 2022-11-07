@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import image from '../images/user-thumb.png'
-import nft from '../images/account.svg'
-import right from '../images/right_arrow.svg'
 import './MyPage.css'
 import Transfer from './TokenTransfer'
 import MintNft from './MintNft'
@@ -52,38 +49,48 @@ const LoginMypage = ({ address }) => {
     }
     useEffect(() => {
         getAll();
-    }, [])
+
+    },)
     return (
         <div>
             <div className='head'>
-
-                <div className='imgs'>
-                    <div className="thumb-wrapper">
-                        <img src={image} alt="thumb" className='thumb' />
+                <div>
+                    <div className='imgs'>
+                        <div className="thumb-wrapper">
+                            <img src={`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyBhxEL-Vw6UsiCP4c7QBiaOLFAKXW6pMq4g&usqp=CAU`} alt="thumb" className='thumb' />
+                        </div>
+                    </div>
+                    <div className="text-area">
+                        < h1>{nickname}님 환영합니다!</h1>
+                        <div className='desc'>포스팅 :{myPost.length}개<p />
+                            보유 NFT :{myNft.length}개</div>
+                        <div className="address">Your address :{address}</div>
                     </div>
                 </div>
-                <div className="text-area">
-
-                </div>
             </div>
-            <div className="address">Your address :{address}</div>
+            <ul className=''></ul>
+
             <p></p>
             {myPost.map((el) => {
                 return <div>
-                    <div>title : {el.title}</div>
-                    <div>likes : {el.likes} </div>
+                    <div>
+                        <div className='title'>title : {el.title}</div>
+                        <div>👍 : {el.likes} </div>
+                    </div>
                 </div>
             })}
             <p></p>
-            {myNft.map((el, idx) => {
-                return (
-                    <div>
-                        <img onClick={handleSell} id={idx} src={`https://steemEight.infura-ipfs.io/ipfs/${el.Url}`}></img>
-                        <div>name : {el.Name}</div>
-                        <div>tokenId : {el.tokenId}</div>
-
-                    </div>)
-            })}
+            <div className='product_container'>
+                {myNft.map((el, idx) => {
+                    return (
+                        <div className="product">
+                            <div className="product_img_div"><img onClick={handleSell} id={idx} src={`https://steemEight.infura-ipfs.io/ipfs/${el.Url}`} className="product_img" /></div>
+                            <h5 className="product_des"> {el.Name}</h5>
+                            <p className="product_des"> {el.tokenId}</p>
+                        </div>
+                    )
+                })}
+            </div>
             <button className="" onClick={() => { setTransferBtn(!transferBtn) }}>transferBtn</button>
             {transferBtn && <Transfer address={address} />}
             <p></p>

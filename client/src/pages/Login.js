@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios"
 import logo from "../images/Logomark-steemit.png"
 import './Login.css'
@@ -38,7 +38,7 @@ function Login({ setCheckLogin, address, login }) {
                         console.log(localStorage.getItem('address'))
                         setCheckLogin();
                         alert(`"${result.data[0].user_nickname}"님 환영합니다.`)
-                        return console.log(login)
+                        return navigate('/')
                     } else {
                         return alert("password is wrong");
                     }
@@ -48,6 +48,8 @@ function Login({ setCheckLogin, address, login }) {
 
         }
     }
+
+
     return (
         <div className="main">
             <div className="sub-main">

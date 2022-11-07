@@ -10,10 +10,7 @@ const Headers = ({ login, setLogout }) => {
         setLogout();
 
     }
-    // useEffect(() => {
 
-
-    //   }, [login]);
     return (
         <>
             <Navbar style={{ backgroundSize: "0", backgroundColor: "#06d6a9" }}>
@@ -25,7 +22,7 @@ const Headers = ({ login, setLogout }) => {
                         <Nav.Link href="/Post">Post</Nav.Link>
                         <Nav.Link href="/market">Market</Nav.Link>
                         <Nav.Link href="/SignUp">SignUp</Nav.Link>
-                        {login ? <Link to="/" onClick={handleLogout}>Logout</Link> : <Nav.Link href="/Login">Login</Nav.Link>}
+                        {login ? <Nav.Link ><div to="/" onClick={handleLogout}>Logout</div></Nav.Link> : <Nav.Link href="/Login">Login</Nav.Link>}
                     </Nav>
                 </Container>
             </Navbar>
