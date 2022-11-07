@@ -182,7 +182,7 @@ app.post("/querymintdata/", (req, res) => {
 app.post("/mint/mynft", (req, res) => {
   mynft(req.body, res);
 });
-
+//
 app.post("/mint/changeAddress", (req, res) => {
   addressChange(req.body, res);
 })
