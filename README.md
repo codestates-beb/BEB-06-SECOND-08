@@ -94,4 +94,23 @@
         * Post
             * 글작성 저장하고, 화면 보여주기
             * 좋아요, 보상받기 
+            
+2022.11.07  (참석자 : 김준섭, 이정원, 문지훈, 최진영)
+* FE
+    * Mint,MyPage, Market place 
+        * 기능 구현 완료
+        * CSS 업데이트 예정 
+    * Post
+        * 화면 구성 완료
+        * Like, text 작성시 보상 시스템 구현 ( web3 연결 )
+        * DB 저장 
+            * Like update 하는것 정원님이랑 맞춰보기
+            * Text 작성 후 DB 저장 정원님이랑 맞춰보기
+    * Footer update 예정
+* BE
+    * 2차머지
+    * Post - FE 랑 맞춰보기 (like, text 작성 )
+    * NFT mint - 지훈님이랑 논의하기 
+* 전체머지
+    * 월요일 저녁 8시 
 
