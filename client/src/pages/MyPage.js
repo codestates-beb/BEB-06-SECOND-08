@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import LoginMypage from '../components/MyPage'
+import LoginMypage from '../components/mypage'
 import { Link } from 'react-router-dom'
 
 

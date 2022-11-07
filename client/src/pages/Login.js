@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios"
 import logo from "../images/Logomark-steemit.png"
 import './Login.css'
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 
-function Login({ setCheckLogin, address }) {
-    const [password, setpwd] = useState(undefined)
+function Login({ setCheckLogin, address, login }) {
+    const navigate = useNavigate();
+    const [password, setpwd] = useState(undefined);
 
+
+    console.log(localStorage.getItem("address"))
 
     const onHandlePwd = (e) => {
         setpwd(e.target.value)
@@ -18,20 +21,26 @@ function Login({ setCheckLogin, address }) {
     const loginChange = async () => {
         try {
 
-            axios.post('http://localhost:8080/login',
+            axios.post('http://localhost:4000/login',
                 {
-                    address,
-                    password
+                    user_address: address,
+                    user_password: password
                 })
                 .then((result) => {
-                    if (!result.data.address) {
-                        alert("일치하는 회원이 없습니다! 회원가입을 해주세요")
+                    if (!result.data[0].user_address) {
+                        console.log(result.data[0].user_address)
+                        return alert("일치하는 회원이 없습니다! 회원가입을 해주세요")
                     }
-                    if (result.data.address === address && result.data.password === password) {
+                    if (result.data[0].user_address === address && result.data[0].user_password === password) {
+                        localStorage.setItem('address', result.data[0].user_address);
+                        localStorage.setItem('password', result.data[0].user_password);
+                        localStorage.setItem('nickname', result.data[0].user_nickname);
+                        console.log(localStorage.getItem('address'))
                         setCheckLogin();
-                        alert`${result.data.nickName}님 환영합니다.`
+                        alert(`"${result.data[0].user_nickname}"님 환영합니다.`)
+                        return navigate('/')
                     } else {
-                        alert("password is wrong");
+                        return alert("password is wrong");
                     }
                 })
         } catch (err) {
@@ -39,6 +48,8 @@ function Login({ setCheckLogin, address }) {
 
         }
     }
+
+
     return (
         <div className="main">
             <div className="sub-main">

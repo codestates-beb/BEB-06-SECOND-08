@@ -1,34 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import LoginMypage from '../components/MyPage'
+import LoginMypage from '../components/mypage'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import abi from "../components/abi/abi";
 import Web3 from 'web3'
-const smAddress = "0x5404EcB07eea74Cc3B121E272156eE56ac6Bb399";
+const smAddress = "0xd631ed21F0d1702761ad6dc36732494183871C2b";
 const web3 = new Web3(Web3.givenProvider);
 const contract = new web3.eth.Contract(abi, smAddress);
 const MarketPlace = ({ address }) => {
     const [sellNft, setSellNft] = useState([]);
-    const dummdata = [{
-        address: "0xBD1E0DcB12E38E2942e7209dEF0ec7FDA88fBd2F",
-        tokenId: 0,
-        name: 123
 
-    }, {
-        address: 123333,
-        tokenId: 12,
-        name: 'name'
-    }, {
-        address: 12344444,
-        tokenId: 33,
-        name: 'what'
-    }]
     const marketLoad = () => {
         try {
-            axios.get('http://localhost:4000/mint/selldata').then((res) => {
+            axios.post('http://localhost:4000/mint/selldata', {
+                "sell": 1
+            }).then((res) => {
+                console.log(res.data)
                 setSellNft(res.data);
             })
-            //엔드포인트 지정받아서 sell 값 true인 친구들 받아오기
+
         } catch (err) {
             console.log(err) //axios확인
         }
@@ -36,37 +26,48 @@ const MarketPlace = ({ address }) => {
     const handleBuy = (e) => {
         const number = e.target.value;
         console.log(number)
-        console.log(`rrr` + dummdata[number].address)
+        console.log(('from' + window.ethereum.selectedAddress))
+        console.log(`to` + sellNft[number].address)
+        console.log('target' + sellNft[number].tokenId)
         console.log(address)
-        // contract.methods
-        //     .buyNFT(dummdata[number].address, window.ethereum.selectedAddress, dummdata[number].tokenId, 10)
-        //     .send({ from: window.ethereum.selectedAddress })
-        {
-            contract.methods
-                .NFTownerOf(0)
-                .call()
-                .then((e) => {
-                    console.log("adress:", e);
-                });
-        };
+        contract.methods
+            .buyNFT(sellNft[number].address, window.ethereum.selectedAddress, sellNft[number].tokenId, 100)
+            .send({ from: window.ethereum.selectedAddress }).then((res) => {
+                axios.post("http://localhost:4000/mint/changeAddress", {
+
+                    address: window.ethereum.selectedAddress,
+                    tokenId: sellNft[number].tokenId
+                })
+            })
+        // {
+        //     contract.methods
+        //         .NFTownerOf()
+        //         .call()
+        //         .then((e) => {
+        //             console.log("address:", e);
+        //         });
+        // };
 
         //오픈씨에 왜 안올라오는지 확인하기.
     }
     useEffect(() => {
-        // marketLoad();
+        marketLoad();
 
     }, []);
     return (
-        <div>
-            <div>
-                {dummdata.map((el, idx) => {
-                    return <div>
-                        <div>owner :{el.address}</div>
-                        <div>tokenId : {el.tokenId}</div>
-                        <div>name : {el.name} </div>
-                        <img src='https://steemEight.infura-ipfs.io/ipfs/QmXsZjSMxHEtFwYbm6JbFJvwRgR7tbbM3N1KBFE6osA5A6'></img>
-                        <button value={idx} onClick={handleBuy}>Buy</button>
-                    </div>
+        <div className='market'>
+            <h3> Market Place</h3>
+            <div className='product_container'>
+
+                {sellNft.map((el, idx) => {
+                    return (
+                        <div className="product">
+                            <div className="product_img_div"><img src={`https://steemEight.infura-ipfs.io/ipfs/${el.Url}`} className="product_img" /></div>
+                            <p className="product_des"> {el.tokenId}</p>
+                            <p className="product_des"> {el.Name}</p>
+                            <button value={idx} onClick={handleBuy}>Buy</button>
+                        </div>
+                    )
 
                 })}
             </div>

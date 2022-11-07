@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios"
 
 function SignUp({ address }) {
+
+
     const [password, setPwd] = useState();
     const [confirmPwd, setConfirmPwd] = useState();
     const [nickname, setNickName] = useState();
@@ -34,19 +36,14 @@ function SignUp({ address }) {
 
 
                 axios
-                    .post("http://localhost:8080/register", {
-                        address,
-                        nickname,
-                        password,
-
-                    }).then((res) => {
-                        console.log(res)
-                        if (res.status(200)) {
-                            return alert("회원가입 성공!")
-                        } else {
-                            return alert("아이디가 이미 존재합니다.")
-                        }
-                    })
+                    .post(`http://localhost:4000/register`,
+                        {
+                            user_address: address,
+                            user_nickname: nickname,
+                            user_password: password,
+                        }).then((res) => {
+                            console.log(res)
+                        })
             }
         }
     }

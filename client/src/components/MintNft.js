@@ -10,7 +10,7 @@ import { Form } from "react-router-dom";
 //ipfs
 const projectId = "2GwlTAQdyyInesaPvwtta8CDq7z"
 const projectSecret = "bc12b7f49f073069463cb461e210777c"
-const smAddress = "0x5404EcB07eea74Cc3B121E272156eE56ac6Bb399";
+const smAddress = "0xd631ed21F0d1702761ad6dc36732494183871C2b";
 const auth = "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64"); //basic 띄어쓰기 꼭 넣기
 const client = create({
     host: "ipfs.infura.io",
@@ -23,8 +23,9 @@ const client = create({
 
 const MintNft = ({ address }) => {
     const [imageView, setImageView] = useState(false)
+    let metaDataUrl = ''
+    let imgCid = ''
     const [imgFile, setImgfile] = useState()
-    const [imgUrl, setImgUrl] = useState();
     const [name, setName] = useState("aa");
     const sell = false //이데이터가 어떻게 넘어가는지 확인
     const uploadImg = (e) => {
@@ -41,59 +42,73 @@ const MintNft = ({ address }) => {
         setName(e.target.value)
         console.log(e.target.value)
     }
-    const minting = async () => {
-        const imgUrl = await client.add(imgFile); //cid
-        setImgUrl(imgUrl)
-        console.log("https://steemEight.infura-ipfs.io/ipfs/" + imgUrl.path)
+    const makeMeta = async () => {
+        await client.add(imgFile).then((res) => {
+
+            imgCid = res.path
+            console.log(imgCid)
+            return imgCid;
+        })
+        //console.log("imgURL" + "https://steemEight.infura-ipfs.io/ipfs/" + imgCid)
 
 
         //메타데이터 정보
         const metaData = {
             name,
-            image: "https://steemEight.infura-ipfs.io/ipfs/" + imgUrl.path,
+            image: "https://steemEight.infura-ipfs.io/ipfs/" + imgCid,
 
         }
 
         const metaIpfs = await client.add(JSON.stringify(metaData)) //메타데이터 ipfs CID
 
-        const metaDataUrl = "https://steemEight.infura-ipfs.io/ipfs/" + metaIpfs.path; //cid
+        metaDataUrl = "https://steemEight.infura-ipfs.io/ipfs/" + metaIpfs.path; //cid
         console.log(metaDataUrl)
+
+    }
+    const minting = async () => {
+        makeMeta();
         const web3 = new Web3(window.ethereum)
         const transaction = {
             from: address,
-            gas: 10000000, //100만
+            gas: 20000000, //100만
             gasPrice: web3.utils.toWei("1.5", "gwei")
         }
 
         const contract = new web3.eth.Contract(abi, smAddress);
+
         const Minting = await contract.methods.NFTMint(metaDataUrl).send(transaction).then((res) => {
-            // id 값 접근 ==>console.log(res) setState id 저장하고 db
-            alert("success")
-            Minted();
+            console.log(res)
+
+            return contract.methods
+                .getTokenId()
+                .call({ from: window.ethereum.selectedAddress })
+                .then((e) => {
+
+                    return Minted(e);
+                })
+
         })
+
+        alert("success")
+
         return Minting;
     }
-    const Minted = () => {
-        const formData = new FormData();
-        //formData.append("Id", id)
-        formData.append("ADDRESS", address);
-        formData.append("Name", name);
-        formData.append("Url", imgUrl);
-        formData.append("Sell", sell); //sell false 로 보내는데 mynft에서 판매등록을 할 수 있게 해준 다음 버튼을 눌러서 true 만들면  db업데이트 하고 마켓플레이스에 보이게하기.
-        //토큰아이디 오토인크리먼트로 설정해달라고 말씀드리기, 코스트는 고정이라 값을 빼고 싶지만 추가도 가능함...
-        //가격입력을 추가해보도
-
-        axios.post("http//localhost:8080/savemintdata", formData
-            // {
-            //     headers: { "Content-Type": "application/x-www-form-urlencoded" }
-            // }
-        ) //되는지 확인해보기
+    const Minted = (e) => {
+        console.log(`here` + imgCid)
+        axios.post("http://localhost:4000/savemintdata", {
+            tokenId: e,
+            Address: address,
+            Name: name,
+            Url: imgCid,
+            Sell: sell
+        })
             .then((res) => {
                 console.log(res.data) //성공여부 받아오기
             })
             .catch((err) => {
                 console.log(err)
             })
+
     }
 
     return (

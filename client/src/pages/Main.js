@@ -16,6 +16,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // const postlist2 = [{{id : 1}, }]
 const SERVER_URL = 'http://localhost:3000/main'
 const Main = () => {
+
     const [search, setSearch] = useState("");
     const [postlist, setPostlist] = useState([
         {

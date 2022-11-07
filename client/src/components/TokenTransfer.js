@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import abi from "./abi/abi";
 import Web3 from 'web3'
 const mainAddr = "0x691d21d24cac39b959fF6a562b0b41C9645EE3a1"; //고릴 주소
-const smAddress = "0x5404EcB07eea74Cc3B121E272156eE56ac6Bb399";
+const smAddress = "0xd631ed21F0d1702761ad6dc36732494183871C2b";
 const web3 = new Web3(Web3.givenProvider);
 const contract = new web3.eth.Contract(abi, smAddress);
 
 const Transfer = ({ address }) => {
     const [tokenQty, setTokenQty] = useState();
     const [toAddr, setToAddr] = useState();
+    const [balance, setBalance] = useState();
     const handleTokenQty = (e) => {
         setTokenQty(e.target.value);
     };
@@ -19,6 +20,7 @@ const Transfer = ({ address }) => {
             .call()
             .then((e) => {
                 console.log("balance:", e);
+                setBalance(e);
             });
     };
     const receiverAddr = (e) => {
@@ -41,7 +43,7 @@ const Transfer = ({ address }) => {
     }, []);
     return (
         <div>
-            <div>Your Token :{getBalance}
+            <div>Your Token :{balance}
                 <div>
                 </div>
                 <div>To :
