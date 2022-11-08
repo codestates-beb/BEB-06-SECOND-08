@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import { useState } from "react";
-import axios from "axios"
-import logo from "../images/Logomark-steemit.png"
-import './Login.css'
-import { useNavigate } from "react-router-dom";
-
-
-
-function Login({ setCheckLogin, address }) {
-    const [password, setpwd] = useState(undefined)
-
-
-=======
 import { useEffect, useState } from "react";
 import axios from "axios"
 import logo from "../images/Logomark-steemit.png"
@@ -29,7 +15,6 @@ function Login({ setCheckLogin, address, login }) {
 
     console.log(localStorage.getItem("address"))
 
->>>>>>> a3ba4246141db53664f79846cab6e0c213cedb21
     const onHandlePwd = (e) => {
         setpwd(e.target.value)
         console.log(password)
@@ -37,28 +22,6 @@ function Login({ setCheckLogin, address, login }) {
 
     const loginChange = async () => {
         try {
-<<<<<<< HEAD
-            axios.post('///',
-                {
-                    address,
-                    password
-                })
-                .then((result) => {
-                    if (!result.data.address) {
-                        alert("일치하는 회원이 없습니다! 회원가입을 해주세요")
-                    }
-                    if (result.data.address === address && result.data.password === password) {
-                        setCheckLogin();
-                    } else {
-                        console.log("비번이 틀림");
-                    }
-                })
-        } catch (err) {
-            console.log(err)
-
-        }
-    }
-=======
 
             axios.post('http://localhost:4000/login',
                 {
@@ -89,7 +52,6 @@ function Login({ setCheckLogin, address, login }) {
     }
 
 
->>>>>>> a3ba4246141db53664f79846cab6e0c213cedb21
     return (
         <div className="main">
             <div className="sub-main">
@@ -109,17 +71,10 @@ function Login({ setCheckLogin, address, login }) {
                             <div style={{ color: 'white' }}> {address} </div>
                         </div>
                         <div className="second-input">
-<<<<<<< HEAD
-
-                            <input type='password' value={password} placeholder="password" className="name" onChange={onHandlePwd}></input>
-                        </div>
-                        <div className="login-button"> <button onClick={loginChange}>Login</button></div>
-=======
                             <input claseName='input_login' type='password' value={password} placeholder="password" className="name" onChange={onHandlePwd}></input>
                         </div>
                         <div>
                             <button onClick={loginChange}><FontAwesomeIcon icon={faSignature} /></button></div>
->>>>>>> a3ba4246141db53664f79846cab6e0c213cedb21
 
                     </div>
                 </div>

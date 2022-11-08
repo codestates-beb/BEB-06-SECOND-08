@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 /*///////////////////////////App////////////////////*/
 .App {
   text-align: center;
@@ -68,21 +66,10 @@ footer {
   background: linear-gradient(to right, #06d6a9, white);
 }
 /*///////////////////////////////////// myPage///////////////////////*/
->>>>>>> a3ba4246141db53664f79846cab6e0c213cedb21
 .head {
   text-align: center;
   justify-content: center;
   display: flex;
-<<<<<<< HEAD
-  padding: 90px 0 90px 0;
-  background-color: black;
-}
-.thumb {
-  width: 92px;
-  height: 92px;
-  border-radius: 50%;
-}
-=======
   padding: 10px 0 10px 0;
   background-color: rgb(241, 234, 234);
   height: 20%;
@@ -93,7 +80,6 @@ footer {
   border-radius: 50%;
 }
 
->>>>>>> a3ba4246141db53664f79846cab6e0c213cedb21
 h1 {
   margin: 0;
   font-size: 24px;
@@ -116,11 +102,6 @@ h1 {
 }
 
 .imgs {
-<<<<<<< HEAD
-  padding-top: 20px;
-  justify-content: center;
-  display: flex;
-=======
   justify-content: center;
   display: flex;
   text-align: center;
@@ -319,5 +300,4 @@ button:hover {
 .sign_container a {
   text-align: center;
   margin-left: 8px;
->>>>>>> a3ba4246141db53664f79846cab6e0c213cedb21
 }

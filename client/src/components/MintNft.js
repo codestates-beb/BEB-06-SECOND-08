@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import { useState } from "react";
-import axios from "axios"
-const MintNft = ({ address }) => {
-
-    return (
-        <div>
-            <div>Wanna Mint?</div>
-            <div>IPFS</div>
-            <div>Name</div>
-            <div>Description</div>
-        </div>
-=======
 import { React, useState } from "react";
 import axios from "axios"
 import abi from "./abi/abi";
@@ -142,7 +129,6 @@ const MintNft = ({ address }) => {
                 </div>
             </div>
         </div >
->>>>>>> a3ba4246141db53664f79846cab6e0c213cedb21
 
     )
 }

@@ -17,10 +17,18 @@ const List = () => {
     const [likes, setLikes] = useState(false);
 
     
-      const clickLike = () => {
-        axios.patch('http://localhost:4000/likes/${id}', { "likes" : likes })
-        setLikes(likes)
-
+    const clickLike = (e) => {
+        // console.log(e.target.value)
+        const number = e.target.value;
+        console.log('number:',number);
+        console.log(posts[number].title)
+        const title2 = posts[number].title
+       
+        axios.post('http://localhost:4000/like/', {title: title2}).then((res) => {
+            console.log(res.data)
+            setPosts(res.data)
+        })
+      
         contract.methods
           .clickLike(window.ethereum.selectedAddress)
           .send({ from: window.ethereum.selectedAddress })
@@ -38,10 +46,6 @@ const List = () => {
         })
     }
     
-    const toggleLike = async (e) => {
-        const res = await axios.post('http://localhost:4000/likes/:id?')
-        setLikes(!likes)
-    }
 
     useEffect(() => {
         getPosts();
@@ -66,7 +70,7 @@ const List = () => {
                             <div>{el.title}</div>
                             <div>{el.content}</div>
                             <div>{el.likes}</div>
-                            <button onClick={clickLike}>like</button>
+                            <button onClick={clickLike} value={idx}>like</button>
                         </div>
                     </Cardpost>
                 )
