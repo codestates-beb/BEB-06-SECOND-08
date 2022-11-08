@@ -1,5 +1,15 @@
 # BEB-06-SECOND-08
 
+-Project Name : SteemEight
+-Member :김준섭 (BE/SM/Web3), 이정원(BE), 문지훈(FE/GitGub운영), 최진영(FE)
+-Role & Function:
+<img width="943" alt="image" src="https://user-images.githubusercontent.com/81156500/200606034-e3431cdf-846a-433a-8a05-49f060037878.png">
+
+#Detail View
+
+
+ 
+
 
 # 회의록 (전체미팅)
 22'Oct'27 (참석하신분: 김준섭, 문지훈, 최진영, 이정원)
