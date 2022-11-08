@@ -18,7 +18,7 @@ const List = () => {
 
     
       const clickLike = () => {
-        axios.patch('http://localhost:4000/likes/:id?', { "likes" : likes })
+        axios.patch('http://localhost:4000/likes/${id}', { "likes" : likes })
         setLikes(likes)
 
         contract.methods

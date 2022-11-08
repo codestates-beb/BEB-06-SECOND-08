@@ -9,5 +9,4 @@ const Main = () => {
     </h1>
   )
 }
-
-export default Main
+export default Main;

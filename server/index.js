@@ -2,20 +2,26 @@ import express, { json } from "express";
 import cors from "cors";
 import multer from "multer";
 import getTokenUri from "./apps/getTokenUri.js";
-import saveMinData from "./apps/saveMintData.js";
+import saveMintData from "./apps/saveMintData.js";
 import getAllMintData from "./apps/getAllMinData.js";
-import queryMintdata from "./apps/queryMintdata.js";
+import sellData from "./apps/sellData.js";
 import mynft from "./apps/mynft.js";
 import dotenv from "dotenv";
 import mysql from "mysql";
+import queryMintData from "./apps/queryMintData.js"
+import addressChange from "./apps/addresChange.js";
+
 
 dotenv.config();
+
 const upload = multer({
   storage: multer.memoryStorage(),
 });
 //@expres 연결
 const app = express();
 app.use(express.json());
+//memory leak
+app.setMaxListeners(20)
 app.listen(4000);
 app.use(cors());
 //@ Mysql 로그인
@@ -80,15 +86,9 @@ app.post("/login", function (req, res) {
     `select * from user where user_address = "${address}"`,
     function (err, result, fields) {
       if (err) return console.log(err);
-      if (result.length) {
-        if (result[0].user_password === password) {
-          res.status(200).json(result);
-        } else {
-          res.status(400).json({ message: "address and password not match" });
-        }
-      } else {
-        res.status(404).json({ message: "address not exists" });
-      }
+
+      res.status(200).json(result);
+
     }
   );
 });
@@ -104,15 +104,47 @@ app.post("/post", function (req, res) {
     function (err, result, fields) {
       if (err) return console.log(err);
       //console.log(result);
-      // res.send(result);
+      //  res.send(result);
     }
   );
-  //  저장하고 저장된 데이터를 받고 싶으면살리기
+  // 저장하고 저장된 데이터를 받고 싶으면살리기
   connection.query("select * from post", (err, result, fields) => [
     res.send(result),
   ]);
-  
+
 });
+//@ post all data
+app.get("/postall", function (req, res) {
+  connection.query("select * from post", (err, result, fields) => [
+    res.send(result),
+  ]);
+});
+
+//@ content만 주기
+app.get("/post/:nickname", function (req, res) {
+  const nickname = req.params.nickname;
+  //console.log(nickname)
+  connection.query(
+    `select * from post where nickname = "${nickname}"`,
+    (err, result, fields) => {
+      if (err) return console.log(err);
+      console.log(result);
+      res.send(result);
+    }
+  );
+});
+
+/* @@ login된 사람만 사용가능하게끔
+function isLogin(req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    res.send("로그인을 해주세요");
+  }
+}
+*/
+
+//######################
 
 //@ post all data
 app.get("/postall", function (req, res) {
@@ -161,22 +193,30 @@ app.post("/tokenuri", (req, res) => {
 
 //@ Mint data 저장
 app.post("/savemintdata", (req, res) => {
-  saveMinData(req.body, res);
+  saveMintData(req.body, res);
 });
 //@ Mint data 불러오기
 app.get("/mint/getalldata", (req, res) => {
   getAllMintData(res);
 });
 
-//@ queryMintData
+//@ marketplace sellData
 app.post("/mint/selldata", (req, res) => {
-  queryMintdata(req.body, res);
+  sellData(req.body, res);
 });
 
+//get myNft
+app.post("/querymintdata/", (req, res) => {
+  queryMintData(req.body, res)
+})
+//@sell my nft 
 app.post("/mint/mynft", (req, res) => {
   mynft(req.body, res);
 });
-
+//
+app.post("/mint/changeAddress", (req, res) => {
+  addressChange(req.body, res);
+})
 /*
  const [imageSrc, setImageSrc] = useState("");
 
