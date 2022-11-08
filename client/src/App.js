@@ -90,7 +90,9 @@ function App() {
           <Route path="/signup" element={<SignUp address={address} />} />
           <Route path="/market" element={<MarketPlace address={{ address }} />} />
         </Routes>
+
       </div>
+      <Footer />
     </BrowserRouter>
   );
 }

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import abi from "../components/abi/abi";
 import Web3 from 'web3'
+import { FontAwesomeIcon, } from "@fortawesome/react-fontawesome";
+import { faIdCard } from '@fortawesome/free-solid-svg-icons';
 const smAddress = "0xd631ed21F0d1702761ad6dc36732494183871C2b";
 const web3 = new Web3(Web3.givenProvider);
 const contract = new web3.eth.Contract(abi, smAddress);
@@ -36,8 +38,9 @@ const MarketPlace = ({ address }) => {
                 axios.post("http://localhost:4000/mint/changeAddress", {
 
                     address: window.ethereum.selectedAddress,
+                    sell: 0,
                     tokenId: sellNft[number].tokenId
-                })
+                }).then((res) => { console.log(res) })
             })
         // {
         //     contract.methods
@@ -56,22 +59,25 @@ const MarketPlace = ({ address }) => {
     }, []);
     return (
         <div className='market'>
-            <h3> Market Place</h3>
+
+            <h3 className='marketPlace'> Market Place</h3>
+
             <div className='product_container'>
 
                 {sellNft.map((el, idx) => {
                     return (
                         <div className="product">
                             <div className="product_img_div"><img src={`https://steemEight.infura-ipfs.io/ipfs/${el.Url}`} className="product_img" /></div>
+                            <p className="product_des"><FontAwesomeIcon icon={faIdCard} /> {el.address.slice(0, 12)}...</p>
                             <p className="product_des"> {el.tokenId}</p>
                             <p className="product_des"> {el.Name}</p>
-                            <button value={idx} onClick={handleBuy}>Buy</button>
+                            <button className='btn_buy' value={idx} onClick={handleBuy}>Buy</button>
                         </div>
                     )
 
                 })}
             </div>
-        </div>
+        </div >
     )
 }
 export default MarketPlace;

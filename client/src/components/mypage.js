@@ -35,8 +35,6 @@ const LoginMypage = ({ address }) => {
         const i = e.target.id
 
         if (window.confirm("판매하시겠습니까?")) {
-
-
             axios
                 .post("http://localhost:4000/mint/mynft", { tokenId: myNft[i].tokenId })
                 .then((res) => {
@@ -46,6 +44,14 @@ const LoginMypage = ({ address }) => {
 
                 })
         }
+    }
+    const transferHandle = () => {
+        setTransferBtn(!transferBtn)
+        setMintNftBtn(false)
+    }
+    const mintHandle = () => {
+        setMintNftBtn(!mintNftBtn)
+        setTransferBtn(false)
     }
     useEffect(() => {
         getAll();
@@ -90,20 +96,27 @@ const LoginMypage = ({ address }) => {
                         </div>
                     )
                 })}
+
             </div>
-            <button className="" onClick={() => { setTransferBtn(!transferBtn) }}>transferBtn</button>
-            {transferBtn && <Transfer address={address} />}
-            <p></p>
+            <div className='btn_container'>
+                <div >
+                    <button className="btnMypage" onClick={transferHandle}>Transfer</button>
+                    {transferBtn && <div className='trans_container'> <Transfer address={address} /> </div>}
 
-            <button onClick={() => { setMintNftBtn(!mintNftBtn) }}>MintBtn</button>
-            {mintNftBtn && <MintNft address={address} />
-            }
-            <p></p>
+                </div>
+                <p></p>
+
+                <div className>
+                    <button className="btnMypage" onClick={mintHandle}>Mint!</button>
+                    {mintNftBtn && <div className='trans_container'><MintNft address={address} /></div>
+                    }
+                </div>
+            </div>
 
 
 
 
-        </div>
+        </div >
     )
 }
 export default LoginMypage;

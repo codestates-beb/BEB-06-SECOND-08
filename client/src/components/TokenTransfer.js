@@ -48,7 +48,7 @@ const Transfer = ({ address }) => {
                 </div>
                 <div>To :
                     <input
-                        className="input"
+                        className="create_container"
                         type='text'
                         onChange={receiverAddr}>
                     </input><p />
@@ -57,12 +57,12 @@ const Transfer = ({ address }) => {
                 </div>
                 <div>Qty :
                     <input
-                        className="input"
+                        className="create_container"
                         type='text'
                         onChange={handleTokenQty}>
                     </input>
                     <p /> Number of SteemEight : {tokenQty}<p />
-                    <button onClick={transferToken}>Btn</button>
+                    <button className='btnMypage' onClick={transferToken}>Send!</button>
                 </div>
             </div>
         </div>

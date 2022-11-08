@@ -17,7 +17,7 @@ export default function addressChange(req, res) {
     });
 
     connection.query(
-        `UPDATE MintData SET address= "${req.address}"  WHERE tokenId = ${req.tokenId}`,
+        `UPDATE MintData SET address= "${req.address}" sell=${req.sell} WHERE tokenId = ${req.tokenId}`,
         (error, results, fields) => {
             if (error) throw error;
             res.send(results);
