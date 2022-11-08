@@ -103,8 +103,8 @@ app.post("/post", function (req, res) {
     `insert into post values('${nickname}', '${title}', '${content}', '${likes}')`,
     function (err, result, fields) {
       if (err) return console.log(err);
-      //console.log(result);
-      //  res.send(result);
+      console.log(result);
+      res.status(200);
     }
   );
   // 저장하고 저장된 데이터를 받고 싶으면살리기
@@ -122,13 +122,14 @@ app.get("/postall", function (req, res) {
 
 //@ content만 주기
 app.get("/post/:nickname", function (req, res) {
+  console.log('req' + req.params.nickname)
   const nickname = req.params.nickname;
   //console.log(nickname)
   connection.query(
     `select * from post where nickname = "${nickname}"`,
     (err, result, fields) => {
       if (err) return console.log(err);
-      console.log(result);
+
       res.send(result);
     }
   );
@@ -151,7 +152,7 @@ app.get("/postall", function (req, res) {
   connection.query("select * from post", (err, result, fields) => [
     res.send(result),
   ]);
-}); 
+});
 //@ content만 주기
 app.get("/post/:nickname?", function (req, res) {
   const nickname = req.params.nickname;
@@ -172,7 +173,7 @@ app.post("/like", (req, res) => {
       //res.send(result);
     }
   );
-    connection.query("SELECT * FROM post", (err, result, field) => {
+  connection.query("SELECT * FROM post", (err, result, field) => {
     res.send(result);
   });
 });
