@@ -12,12 +12,20 @@ export default function mynft(req, res) {
 
   connection.connect();
 
+<<<<<<< HEAD
+  connection.query("USE NFTStore", function (error, results, fields) {
+=======
   connection.query("USE SteemEight", function (error, results, fields) {
+>>>>>>> a3ba4246141db53664f79846cab6e0c213cedb21
     if (error) throw error;
   });
 
   connection.query(
+<<<<<<< HEAD
+    `UPDATE MintData SET sell = 1 WHERE Id =${req.Id}`,
+=======
     `UPDATE MintData SET sell = 1 WHERE tokenId =${req.tokenId}`,
+>>>>>>> a3ba4246141db53664f79846cab6e0c213cedb21
     (error, results, fields) => {
       if (error) throw error;
       res.send(results);

@@ -146,6 +146,37 @@ function isLogin(req, res, next) {
 
 //######################
 
+//@ post all data
+app.get("/postall", function (req, res) {
+  connection.query("select * from post", (err, result, fields) => [
+    res.send(result),
+  ]);
+}); 
+//@ content만 주기
+app.get("/post/:nickname?", function (req, res) {
+  const nickname = req.params.nickname;
+  connection.query(
+    `select * from post where nickname = "${nickname}"`,
+    (err, result, fields) => {
+      if (err) return console.log(err);
+      console.log(result);
+      res.send(result);
+    }
+  );
+});
+
+/* @@ login된 사람만 사용가능하게끔
+function isLogin(req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    res.send("로그인을 해주세요");
+  }
+}
+*/
+
+//######################
+
 //@ token uri 생성
 //app.post("/tokenuri", upload.single("img"), (req, res) => {
 app.post("/tokenuri", (req, res) => {

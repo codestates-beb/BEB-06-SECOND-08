@@ -11,6 +11,14 @@ const Headers = ({ login, setLogout }) => {
 
     }
 
+<<<<<<< HEAD
+const Headers = (login) => {
+
+    const handleLogout = () => {
+
+    }
+=======
+>>>>>>> a3ba4246141db53664f79846cab6e0c213cedb21
     return (
         <>
             <Navbar style={{ backgroundSize: "0", backgroundColor: "#06d6a9" }}>
@@ -20,9 +28,13 @@ const Headers = ({ login, setLogout }) => {
                         <Nav.Link href="/">Main</Nav.Link>
                         <Nav.Link href="/MyPage">MyPage</Nav.Link>
                         <Nav.Link href="/Post">Post</Nav.Link>
+<<<<<<< HEAD
+                        {login ? <Nav.Link href="/" onClick={handleLogout}>Logout</Nav.Link> : <Nav.Link href="/Login">Login</Nav.Link>}
+=======
                         <Nav.Link href="/market">Market</Nav.Link>
                         <Nav.Link href="/SignUp">SignUp</Nav.Link>
                         {login ? <Nav.Link ><div to="/" onClick={handleLogout}>Logout</div></Nav.Link> : <Nav.Link href="/Login">Login</Nav.Link>}
+>>>>>>> a3ba4246141db53664f79846cab6e0c213cedb21
                     </Nav>
                 </Container>
             </Navbar>
