@@ -10,12 +10,15 @@
 
 * Login/Logout
 https://user-images.githubusercontent.com/81156500/200611349-12049f9c-4b62-4266-8c1a-abb641458ea0.mov
+<img width="769" alt="스크린샷 2022-11-09 오전 12 53 12" src="https://user-images.githubusercontent.com/81156500/200612647-cadf0c4c-a0c2-4aa8-aeab-03afce153b57.png"><img width="650" alt="스크린샷 2022-11-09 오전 12 53 24" src="https://user-images.githubusercontent.com/81156500/200612664-10662795-4b14-4d10-b19a-854ad6303675.png">
 
 * Market
 https://user-images.githubusercontent.com/81156500/200611762-08d85c29-9305-4ffe-84ae-64bc060fb88b.mov
+<img width="1609" alt="스크린샷 2022-11-09 오전 12 54 37" src="https://user-images.githubusercontent.com/81156500/200612923-3075d243-3575-4ef2-aa83-90e9a33fc828.png">
 
 * My Page
 https://user-images.githubusercontent.com/81156500/200611807-7ff4b4d5-fcc6-4525-87c3-706c12a731b7.mov
+<img width="1628" alt="스크린샷 2022-11-09 오전 12 55 50" src="https://user-images.githubusercontent.com/81156500/200613205-3cfe4ce1-c78d-4a11-9309-829629c9be3b.png">
 
 * Post 
 
