@@ -10,7 +10,7 @@ const MyPage = ({ login, address }) => {
 
   return (
     <div>
-      {login ? <LoginMypage address={address} /> : <div>로그인을 해주세요<Link to='/login' >Login</Link></div>}
+      {login ? <LoginMypage address={address} /> : <div className='form_login'><p>로그인을 해주세요</p><a href='/login' >Login</a></div>}
     </div >
   )
 }

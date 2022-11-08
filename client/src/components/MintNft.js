@@ -116,18 +116,19 @@ const MintNft = ({ address }) => {
             <div>Create Nft</div>
             <div>
                 <label htmlFor="file0" />{/* 인풋앞에 붙이는거 */}
-                <input type="file" id="file0" onChange={uploadImg}></input>
+                <input className="upload-name" type="file" id="file0" onChange={uploadImg}></input>
+
                 <div>
                     <img className={"uploadImg" + (imageView ? "on" : "")} />
                 </div>
                 <div>
-                    Name : <input onChange={handleName} />
+                    Name : <input className="create_container" onChange={handleName} />
                 </div>
                 <div>
-                    <button onClick={minting}>mint</button>
+                    <button onClick={minting} className='btn_buy'>mint</button>
                 </div>
             </div>
-        </div>
+        </div >
 
     )
 }

@@ -3,6 +3,8 @@ import axios from "axios"
 import logo from "../images/Logomark-steemit.png"
 import './Login.css'
 import { Navigate, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon, } from "@fortawesome/react-fontawesome";
+import { faSignature } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -69,9 +71,10 @@ function Login({ setCheckLogin, address, login }) {
                             <div style={{ color: 'white' }}> {address} </div>
                         </div>
                         <div className="second-input">
-                            <input type='password' value={password} placeholder="password" className="name" onChange={onHandlePwd}></input>
+                            <input claseName='input_login' type='password' value={password} placeholder="password" className="name" onChange={onHandlePwd}></input>
                         </div>
-                        <div className="login-button"> <button claseName="loginBtn" onClick={loginChange}>Login</button></div>
+                        <div>
+                            <button onClick={loginChange}><FontAwesomeIcon icon={faSignature} /></button></div>
 
                     </div>
                 </div>
