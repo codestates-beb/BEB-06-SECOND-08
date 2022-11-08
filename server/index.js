@@ -165,6 +165,17 @@ app.get("/post/:nickname?", function (req, res) {
   );
 });
 
+app.post("/like", (req, res) => {
+  connection.query(
+    `UPDATE post SET likes = likes+1 WHERE title = '${req.body.title}'`,
+    (err, result, filed) => {
+      //res.send(result);
+    }
+  );
+    connection.query("SELECT * FROM post", (err, result, field) => {
+    res.send(result);
+  });
+});
 /* @@ login된 사람만 사용가능하게끔
 function isLogin(req, res, next) {
   if (req.user) {

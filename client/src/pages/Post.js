@@ -18,7 +18,6 @@ const Post = () => {
     const [nickname, setNickname] = useState('');
     const [likes, setLikes] = useState(0)
     const onSubmit = () => {
-
         axios.post('http://localhost:4000/post',
             {
                 "nickname":nickname,

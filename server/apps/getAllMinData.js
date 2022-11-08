@@ -10,11 +10,7 @@ export default function getAllMintData(res) {
   });
 
   connection.connect();
-<<<<<<< HEAD
-  connection.query("USE NFTStore", function (error, results, fields) {
-=======
   connection.query("USE SteemEight", function (error, results, fields) {
->>>>>>> a3ba4246141db53664f79846cab6e0c213cedb21
     if (error) throw error;
   });
 
