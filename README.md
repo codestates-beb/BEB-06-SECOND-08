@@ -6,13 +6,22 @@
 <img width="950" alt="image" src="https://user-images.githubusercontent.com/81156500/200607024-6572ec0c-f929-43a4-869c-5511a69cffbe.png">
 
 
+# Detail View
 
-#Detail View
+* Login/Logout
+https://user-images.githubusercontent.com/81156500/200611349-12049f9c-4b62-4266-8c1a-abb641458ea0.mov
 
+* Market
+https://user-images.githubusercontent.com/81156500/200611762-08d85c29-9305-4ffe-84ae-64bc060fb88b.mov
+
+* My Page
+https://user-images.githubusercontent.com/81156500/200611807-7ff4b4d5-fcc6-4525-87c3-706c12a731b7.mov
+
+* Post 
+
+<img width="1720" alt="스크린샷 2022-11-09 오전 12 47 34" src="https://user-images.githubusercontent.com/81156500/200611870-2376591b-4988-48b6-9f94-09cd47a9d01d.png">
 
  
-
-
 # 회의록 (전체미팅)
 22'Oct'27 (참석하신분: 김준섭, 문지훈, 최진영, 이정원)
 * 역할 구분
