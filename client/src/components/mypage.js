@@ -14,20 +14,19 @@ const LoginMypage = ({ address }) => {
     const nickname = localStorage.getItem("nickname")
     const address2 = window.ethereum.selectedAddress;
     const [myNft, setMyNft] = useState([])
-    const [myPost, setMyPost] = useState([{
-        nickname: 1234,
-        title: 333,
-        likes: 123
-    }]);
+    const [myPost, setMyPost] = useState([]);
     const getAll = () => {
-        // axios.get(`http://localhost:4000/post/${nickname}`).then((res) => {
-        // setMyPost(res.data) //back에서 닉네임으로 주니까 닉네임으로 받기 
-        // })
+        axios.get(`http://localhost:4000/post/${nickname}`).then((res) => {
+            console.log(res.data)
+            setMyPost(res.data) //back에서 닉네임으로 주니까 닉네임으로 받기 
+        })
         axios.post(`http://localhost:4000/querymintdata/`, {
             "address": address2
         }).then((res) => {
             setMyNft(res.data)
         })
+
+
     }
     //확인
 
@@ -55,7 +54,6 @@ const LoginMypage = ({ address }) => {
     }
     useEffect(() => {
         getAll();
-
     },)
     return (
         <div>
@@ -77,15 +75,21 @@ const LoginMypage = ({ address }) => {
             <ul className=''></ul>
 
             <p></p>
-            {myPost.map((el) => {
-                return <div>
-                    <div>
-                        <div className='title'>title : {el.title}</div>
-                        <div>👍 : {el.likes} </div>
+            <div><h3>Your Posts</h3></div>
+            <div className='post_outer'>
+                {myPost.map((el) => {
+
+                    return <div>
+                        <div className='post_container'>
+                            <div className='post_title'> {el.title}</div><br />
+                            <div className='title'> {el.content}</div><br />
+                            <div>👍 : {el.likes} </div>
+                        </div>
                     </div>
-                </div>
-            })}
+                })}
+            </div>
             <p></p>
+
             <div className='product_container'>
                 {myNft.map((el, idx) => {
                     return (
@@ -96,6 +100,7 @@ const LoginMypage = ({ address }) => {
                         </div>
                     )
                 })}
+
 
             </div>
             <div className='btn_container'>

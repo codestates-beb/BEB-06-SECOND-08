@@ -15,27 +15,29 @@ const Post = () => {
 
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
-    const [nickname, setNickname] = useState('');
+    const nickname = localStorage.getItem("nickname")
     const [likes, setLikes] = useState(0)
     const onSubmit = () => {
         axios.post('http://localhost:4000/post',
             {
-                "nickname":nickname,
-                "title":title,
-                "content":body,
-                "likes":likes
+                "nickname": nickname,
+                "title": title,
+                "content": body,
+                "likes": likes
             }
-        )
-        contract.methods
-        .writeTxt(window.ethereum.selectedAddress)
-        .send({ from: window.ethereum.selectedAddress })
-        .then((e) => {
-          console.log("result_writeTxt:", e);
-        });
+        ).then(() => {
+            contract.methods
+                .writeTxt(window.ethereum.selectedAddress)
+                .send({ from: window.ethereum.selectedAddress })
+                .then((e) => {
+                    return alert("100 SteemEight 토큰이 지급되었습니다.")
+                });
+        })
+
     }
     return (
         <div className='Container'>
-          <h1>Create Posting</h1>
+            <h1>Create Posting</h1>
             <div className='mb-3'>
                 <label className='form-lable'>Title</label>
                 <input

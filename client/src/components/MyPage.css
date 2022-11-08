@@ -239,6 +239,12 @@ button:hover {
   margin-left: 10px;
   color: black;
 }
+.col-3 {
+  margin-left: 300px;
+}
+.col-2 {
+  margin-left: 300px;
+}
 .icon_black {
   color: black;
   cursor: pointer;
@@ -264,6 +270,27 @@ button:hover {
   padding: 10px 30px;
   font-size: 15px;
   cursor: pointer;
+}
+.post_outer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.post_container {
+  width: 200px;
+  height: 100%;
+  margin-bottom: 5%;
+  margin-top: 30px;
+  margin-left: 28%;
+  margin-right: 10px;
+  border: 2px solid #06d6a9;
+  border-radius: 7px;
+  font-weight: 500;
+}
+.post_title {
+  border: 1px solid #06d6a9;
+  border-radius: 3px;
+  margin-top: -2px;
 }
 /*///////////////////Sign-Up///////////////////*/
 .sign_container {
