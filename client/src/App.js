@@ -78,7 +78,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Link to="/">
-          <img src={logo} className="App-logo" />
+
         </Link>
         <h1> Steem Eight</h1>
         <Headers login={login} setLogout={setLogout} setCheckLogin={setCheckLogin} />

@@ -37,7 +37,7 @@ const MarketPlace = ({ address }) => {
             .send({ from: window.ethereum.selectedAddress }).then((res) => {
                 axios.post("http://localhost:4000/mint/changeAddress", {
 
-                    address: window.ethereum.selectedAddress,
+                    address: "window.ethereum.selectedAddress",
                     sell: 0,
                     tokenId: sellNft[number].tokenId
                 }).then((res) => { console.log(res) })
