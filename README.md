@@ -3,8 +3,10 @@
 * Project Name : SteemEight
 * Member :김준섭 (BE/SM/Web3), 이정원(BE), 문지훈(FE/GitHub운영), 최진영(FE)
 * Role & Function:
-<img width="950" alt="image" src="https://user-images.githubusercontent.com/81156500/200607024-6572ec0c-f929-43a4-869c-5511a69cffbe.png">
+<img width="947" alt="image" src="https://user-images.githubusercontent.com/81156500/200765456-6f1f9b8c-86a9-4b35-86c1-07d5a94c66c4.png">
 
+# Flow Chart
+<img width="1092" alt="image" src="https://user-images.githubusercontent.com/81156500/200765689-8579beb5-5e4a-41c4-8948-1685c92d3155.png">
 
 # Detail View
 
